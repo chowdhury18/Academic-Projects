@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "predeploy": [],
+    "source": "functions"
+  },
+  "storage": {
+    "rules": "firebase_rules/storage.rules"
+  },
+  "database": {
+    "rules": "firebase_rules/database.rules.json"
+  }
+}

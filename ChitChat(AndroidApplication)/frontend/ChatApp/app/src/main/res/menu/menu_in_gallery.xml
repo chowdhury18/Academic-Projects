@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/gallery_sort_by_date"
+        android:title="Sort by date"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/gallery_sort_by_sender"
+        android:title="Sort by sender"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/gallery_sort_by_tag"
+        android:title="Sort by label"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/gallery_get_full_images"
+        android:title="Show full resolution images"
+        app:showAsAction="never" />
+</menu>

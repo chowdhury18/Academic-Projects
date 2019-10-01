@@ -1,0 +1,18 @@
+{
+    "rules": {
+        "Details": {
+            ".read": true,
+            ".write": true
+        },
+        "Threads": {
+            "$thread_id": {
+                ".read": "data.child('users/'+auth.uid).exists()",
+                ".write": "auth != null"
+            }
+        },
+        "Users": {
+            ".read": true,
+            ".write": true
+        }
+    }
+}
