@@ -1,0 +1,54 @@
+{% extends 'gamestore/player_layout.html' %}
+{% block left_content %}
+    <h1>{{ player_header }}</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%for game in gamelist%}
+            <tr>
+                <td style="width: 20%">{{game.name_of_the_game}}</td>
+                <td style="width: 40%">{{game.description}}</td>
+                <td style="width: 10%">{{game.category}}</td>
+                <td style="width: 10%">${{game.price}}</td>
+                <td>
+                    <form action={% url 'gamestore:player_bill_payment' %} method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="gameid" value="{{game.id}}"/>
+                        <button type="submit" class="btn btn-success">Purchase</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block right_content %}
+    <h3> Search Games </h3>
+    <form style="border: 2px solid #111;" action={% url 'gamestore:player_available_gamelist' %} method='post'>
+        {% csrf_token %}
+        <input style="width: 90%" type="text" placeholder="Search Game.." name="search">
+        <button type="submit" id="faa faa-search"><i class="fa fa-search"></i></button>
+    </form>
+    <form style="border: 2px solid #111;" action={% url 'gamestore:player_available_gamelist' %} method='post'>
+        {% csrf_token %}
+        <select style="width: 90%" id="category" name="category">
+            <option>Select Category</option>
+            <option value="thriller">Thriller</option>
+            <option value="action">Action</option>
+            <option value="sports">Sports</option>
+            <option value="strategy">Strategy</option>
+            <option value="puzzle">Puzzle</option>
+        </select>
+        <button type="submit" id="faa faa-search"><i class="fa fa-search"></i></button>
+    </form>
+    
+{% endblock %}

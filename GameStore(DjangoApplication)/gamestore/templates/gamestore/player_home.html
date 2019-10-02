@@ -1,0 +1,45 @@
+{% extends 'gamestore/player_layout.html' %}
+{% block left_content %}
+    <h1>{{ player_home }}</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {%for game in gamelist%}
+            <tr>
+                <td style="width: 20%">{{game.name_of_the_game}}</td>
+                <td style="width: 50%">{{game.description}}</td>
+                <td style="width: 20%">{{game.category}}</td>
+                <td>                   
+                    <form action={% url 'gamestore:player_gameplay' %} method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="gameid" value="{{game.id}}"/>
+                        <button type="submit" class="btn btn-success">Play</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block right_content %}
+<div class="game_stat">
+    <h3 style="text-align: center;">{{player_name}}</h3>
+    <h3 style="text-align: center;">Statistics</h3>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td style="width: 60%">Total Purchased Games</td>
+                    <td style="width: 40%">{{game_count}}</td>
+                </tr>               
+            </tbody>
+        </table>
+</div>
+{% endblock %}

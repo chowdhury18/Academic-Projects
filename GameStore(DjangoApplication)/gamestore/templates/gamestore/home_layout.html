@@ -1,0 +1,31 @@
+{% load static %}
+<html>
+    <head>
+        <title>Game Store</title>
+        <link rel="stylesheet" href="{% static 'gamestore/css/game.css' %}">
+        <script src="{% static 'gamestore/scripts/myScript.js' %}"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    </head>
+    <body>
+        <div class="page-header">
+            <div class="logo">
+                <img class="gamestore_logo" src="{% static 'gamestore/images/gamestore_logo.png' %}" alt="My image">
+            </div>
+            <div class="topnav">
+                {% block nav %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="home_content">
+            {% block home_content %}
+            {% endblock %}
+        </div>
+        <div class="footer">
+            &copy Team Thunderbolt. All right reserved.
+        </div>
+    </body>
+</html>

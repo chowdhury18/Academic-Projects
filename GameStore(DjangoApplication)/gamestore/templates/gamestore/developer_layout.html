@@ -1,0 +1,15 @@
+{% extends 'gamestore/base_layout.html' %}
+{% block nav %}
+    <a class="active" href={% url 'home' %}>
+      <button type="button" class="btn btn-primary">Home</button>
+    </a>
+    <a class="active" href={% url 'gamestore:developer_home' %}>
+        <button type="button" class="btn btn-primary">View Games</button>
+    </a>
+    <a href={% url 'gamestore:developer_upload' %}>
+        <button type="button" class="btn btn-primary">Upload Game</button>
+    </a>
+    <a href={% url 'logout' %} style="float:right;">
+        <button type="button" class="btn btn-danger">Logout</button>
+    </a>
+{% endblock %}

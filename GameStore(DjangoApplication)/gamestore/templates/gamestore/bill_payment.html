@@ -1,0 +1,32 @@
+{% extends 'gamestore/player_layout.html' %}
+{% block left_content %}
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Attribute</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="width: 20%">Name</td>
+                <td style="width: 60%">{{game.name_of_the_game}}</td>
+            </tr>
+            <tr>
+                <td style="width: 20%">Price</td>
+                <td style="width: 60%">{{game.price}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <form action="http://payments.webcourse.niksula.hut.fi/pay/" method="post">
+        {% csrf_token %}
+            <input type="hidden" name="amount" value="{{ game.price }}"/>
+            <input type="hidden" name="pid" value="{{pid}}"/>
+            <input type="hidden" name="sid" value="{{sid}}"/>
+            <input type="hidden" name="success_url" value="https://project-thunderbolt.herokuapp.com/gamestore/player" />
+            <input type="hidden" name="cancel_url" value="https://project-thunderbolt.herokuapp.com/gamestore/player/gamelist" />
+            <input type="hidden" name="error_url" value="https://project-thunderbolt.herokuapp.com/gamestore/player" />
+            <input type="hidden" name="checksum" value="{{checksum}}"/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+{% endblock %}

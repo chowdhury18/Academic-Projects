@@ -1,0 +1,21 @@
+{% extends 'gamestore/developer_layout.html' %}
+{% block left_content %}
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Sold Count</th>
+                <th scope="col">Total Profit</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%for game in gamelist%}
+            <tr>
+                <td style="width: 20%">{{game.name_of_the_game}}</td>
+                <td style="width: 20%">{{game.counter}}</td>
+                <td style="width: 50%">{{game.total}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

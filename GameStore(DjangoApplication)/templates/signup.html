@@ -1,0 +1,34 @@
+<!-- templates/signup.html -->
+{% extends 'gamestore/home_layout.html' %}
+{% block home_content %}
+  <h2 style="text-align:center;">Sign up</h2>
+  <br>
+<div align="center">
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+
+    <table class="table">
+      <tbody>
+        <tr>
+          <td style="width: 40%;text-align:right">{{ field.label_tag }}</td>
+          <td style="width: 10%">{{ field }}</td>
+          <td>
+            {% if field.help_text %}
+            <small style="display: inline">{{ field.help_text }}</small>
+            {% endif %}
+          </td>
+        </tr>
+      <p>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+      </tbody>
+    </table>
+
+    {% endfor %}
+    <button type="submit" class="btn btn-success">Sign up</button>
+  </form>
+</div>
+{% endblock %}

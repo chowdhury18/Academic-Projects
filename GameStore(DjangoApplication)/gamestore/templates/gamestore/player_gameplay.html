@@ -1,0 +1,130 @@
+{% extends 'gamestore/player_layout.html' %}
+{% block left_content %}
+    <h1>{{player_home}}</h1>
+    <script>
+        var score;
+        $(document).ready(function () {
+            'use strict';
+            $(window).on('message', function (evt) {
+                //Get data from sent message
+                var data = evt.originalEvent.data;
+                var newItem;
+                // when submit score is pressed
+                if(data.messageType == 'SCORE'){
+                    score = data.score;
+                    $.ajax({
+                    url:'{% url 'gamestore:player_gamescore' %}',
+                    type: 'POST',
+                    data: {score: score},
+                    success:function(json){},
+                    complete:function(){},
+                    error:function (xhr, textStatus, thrownError){}
+                    });
+                    var current_score = $('#high').html();
+                    if(current_score < score){
+                        $("#high").text(score);
+                    }
+                // when link of the game is clicked, the resolution of the iframe will be changed
+                // based on the resolution provided by the game
+                }else if(data.messageType == 'SETTING'){
+                    newItem = '\n\t<li>' + (data.options.width || '') + '</li>';
+                    $('#game_iframe').css('width', data.options.width);
+                    $('#game_iframe').css('height', data.options.height);
+                }
+                // when the save button is pressed
+                else if(data.messageType == 'SAVE')
+                {
+                    $.ajax({
+                    url:'{% url 'gamestore:player_gamestate' %}',
+                    type: 'POST',
+                    data: {state: JSON.stringify(data),score:data.gameState.score},
+                    success:function(json){},
+                    complete:function(){},
+                    error:function (xhr, textStatus, thrownError){}
+                    });
+                    var current_score = $('#high').html();
+                    if(current_score < data.gameState.score){
+                        $("#high").text(data.gameState.score);
+                    }
+
+                }
+                // when the load button is pressed
+                // If the previous state of the game is stored then the messageType will be LOAD
+                // messageType will be ERROR if there is no previous state stored
+                else if(data.messageType == 'LOAD_REQUEST')
+                {
+                    $.ajax({
+                    url:'{% url 'gamestore:player_gameload' %}',
+                    type: 'GET',
+                    datatype:'json',
+                    success:function(json){
+
+                        if(json.value)
+                        {
+                            var obj_savestate = JSON.parse(json.value);
+                            obj_savestate.messageType = 'LOAD'
+
+                            var iframeEl = document.getElementById('game_iframe');
+                            iframeEl.contentWindow.postMessage(obj_savestate, '*');
+                        }
+                        else{
+                            var error_message = {
+                            messageType: "ERROR",
+                            info: "Gamestate could not be loaded"
+                            };
+                            var iframeE2 = document.getElementById('game_iframe');
+                            iframeE2.contentWindow.postMessage(error_message, '*');
+                        }
+                    },
+                    complete:function(){},
+                    error:function (xhr, textStatus, thrownError){}
+                    });
+                }
+                $('#actions').prepend(newItem);
+            });
+        });
+    </script>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Attribute</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="width: 20%">Name</td>
+                <td style="width: 60%">{{game.name_of_the_game}}</td>
+            </tr>
+            <tr>
+                <td style="width: 20%">Description</td>
+                <td style="width: 60%">{{game.description}}</td>
+            </tr>
+            <tr>
+                <td style="width: 20%">URL</td>
+                <td style="width: 60%"><a href={{game.url_of_the_game}} target="iframe_a">{{game.url_of_the_game}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <iframe id='game_iframe' width=100px height=100px name="iframe_a" >
+        </iframe>
+    </div>
+
+{% endblock %}
+
+{% block right_content %}
+    <h3 style="text-align: center;">Statistics</h3>
+    <div class="game_stat">
+        <div id="high_score">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td style="width: 60%">Highest Score (Global)</td>
+                        <td id="high" style="width: 40%">{{highest_score}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

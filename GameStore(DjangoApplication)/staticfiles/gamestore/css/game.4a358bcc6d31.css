@@ -1,0 +1,100 @@
+.page-header {
+    /*background-color: rgb(167, 213, 231);*/
+    background-color: #c0c0c0;
+    color: white;
+    height: 10%;
+    width: 100%;
+    overflow: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo {
+    float: left;
+    width: 10%;
+    height: 100%;
+}
+
+.topnav {
+    float: left;
+    width: 90%;
+    height: 100%;
+    color: #111;
+}
+
+.topnav a {
+    color: #111;
+}
+
+.logo .gamestore_logo {
+    width: 100%;
+    height: 100%;
+}
+
+.home_content {
+    height: 88%;
+    background-image: url("../images/background_3.e1dd5708be5b.jpg");
+    overflow: auto;
+    background-size: cover;
+}
+
+.left_content {
+    float: left;
+    width: 80%;
+    height: 88%;
+    /* only for demonstration, should be removed */
+    /*background: rgb(204, 167, 4);*/
+    background-image: url("../images/background_3.e1dd5708be5b.jpg");
+    overflow: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.right_content {
+    float: left;
+    width: 20%;
+    height: 88%;
+    /* only for demonstration, should be removed */
+    background: #111111;
+    font-weight: bold;
+    color: #ffffff;
+    overflow: auto;
+}
+
+.footer {
+    background-color: rgb(167, 213, 231);
+    font-size: 15px;
+    text-align: center;
+    color: rgb(29, 21, 21);
+    width: 100%;
+    height: 4%;
+}
+
+.dev_upload_game {
+    padding: 5%;
+}
+
+iframe.displayed {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.right_content .game_search {
+    border: 2px solid #111;
+}
+
+.table {
+    color: black;
+}
+
+.left_content h1 {
+    color: black;
+}
+
+.game_stat {
+    color: #ffffff;
+}
+
+.game_stat .table {
+    color: #ffffff;
+}

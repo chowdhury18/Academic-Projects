@@ -1,0 +1,30 @@
+{% extends 'gamestore/home_layout.html' %}
+{% block home_content %}
+<h1 style="text-align:center;">Gamestore Ltd.</h1>
+
+<br>
+{% if user.is_authenticated %}
+<h3 style="text-align:center;">Welcome {{ user.username }}</h3>
+<br>
+
+  <p align="center">
+    <a href="https://project-thunderbolt.herokuapp.com/gamestore/">
+      <button class="btn btn-success">Launch Gamestore</button>
+    </a>
+  </p>
+
+    <p align="center">
+      <a href="{% url 'logout' %}"}"><button class="btn btn-success">Log out</button></a>
+    </p>
+    <p align="center">
+      <a href="{% url 'password_reset' %}">reset password</a>
+    </p>
+{% else %}
+  <p align="center">
+    <a href="{% url 'signup' %}"}"><button class="btn btn-success">Sign up</button></a>
+    <a href="{% url 'login' %}"}"><button class="btn btn-success">Log in</button></a>
+  </p>
+
+{% endif %}
+
+{% endblock %}
